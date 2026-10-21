@@ -74,8 +74,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -e . "esphome==2025.7.2"
-      - run: ESPHOME=esphome HJ=hermes-jarvis PY=python scripts/test_adopt_host.sh
+      # esphome pins an older aioesphomeapi than hermes-jarvis needs, so it gets its own environment
+      - run: python -m venv .venv-esphome && .venv-esphome/bin/pip install "esphome==2025.7.2"
+      - run: pip install -e .
+      - run: ESPHOME=$GITHUB_WORKSPACE/.venv-esphome/bin/esphome HJ=hermes-jarvis PY=python scripts/test_adopt_host.sh
 
   docker:
     runs-on: ubuntu-latest
