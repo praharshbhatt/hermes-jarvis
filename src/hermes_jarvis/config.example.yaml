@@ -1,0 +1,65 @@
+# hermes-jarvis configuration. Copy to config.yaml (or run `hermes-jarvis init`).
+# Secrets (API keys, passwords) do NOT go here: put them in .env next to this file.
+# Any setting can also be set from the environment as HJ_<SECTION>_<KEY>, for example HJ_ADMIN_HOST=0.0.0.0.
+
+data_dir: ./data          # settings, session state, downloaded voices, the device key
+
+# jarvis: a calm British butler; neutral: plain. Sets the wording of the quick acknowledgements
+# (and the persona for the "openai" brain). With Hermes, the persona itself lives in Hermes (see docs/hermes-setup.md).
+persona: jarvis
+
+user:
+  name: ""                # your name (only used in the persona text for the "openai" brain)
+  address_as: sir         # how the assistant addresses you in short lines: sir, ma'am, boss, or "" for none
+
+device:
+  host: ""                # empty = find the device automatically. Set an IP address if you have several.
+  port: 6053
+  wake_word: hey_jarvis   # a fresh device has no active wake word; this one is switched on at connect (okay_nabu, hey_mycroft; "" = leave as is)
+
+audio:
+  public_host: ""         # address the device uses to fetch speech clips from this machine. Empty = detect.
+  port: 8651
+
+# The brain writes the answers.
+#   hermes: the Hermes agent (https://hermes-agent.nousresearch.com), with profiles, sessions and tool progress
+#   openai: any OpenAI-compatible endpoint (Ollama, OpenAI, LM Studio, vLLM, OpenRouter, ...)
+brain:
+  type: hermes
+  base_url: http://localhost:8642   # openai type, for example: http://localhost:11434/v1 (Ollama)
+  model: hermes-agent               # openai type, for example: llama3.1
+  api_key_env: HERMES_API_KEY       # name of the environment variable that holds the key
+  history_messages: 24              # openai type: how many past messages to send each turn
+  system_prompt: ""                 # openai type: persona text; empty = the persona preset's text
+
+# Speech to text.
+#   elevenlabs, deepgram, openai: cloud services (audio is sent to them)
+#   local: faster-whisper on this machine, nothing leaves it (pip install 'hermes-jarvis[local-stt]')
+stt:
+  provider: elevenlabs
+  compare_with: ""        # optional second provider, run in parallel and only logged, to compare accuracy and speed
+  language: en
+  local_model: small.en
+  openai_model: gpt-4o-mini-transcribe
+  openai_base_url: https://api.openai.com/v1   # or your own Whisper server
+
+tts:
+  voice: en_GB-alan-medium   # `hermes-jarvis voices list`, or the path to any Piper .onnx file
+
+# Matches a request to an earlier Hermes conversation and profile (needs OPENROUTER_API_KEY).
+router:
+  enabled: true
+
+admin:                    # the web UI: sign-in page, live view, settings, setup guide
+  host: 127.0.0.1         # use 0.0.0.0 only on a trusted network or behind TLS. Needs ADMIN_PASSWORD (or ADMIN_PASSWORD_HASH).
+  port: 8650
+  user: admin
+  session_idle_minutes: 30   # a sign-in ends after this long without activity
+  session_max_hours: 12      # ... and never lasts longer than this
+  trust_proxy: false         # true only behind your own TLS reverse proxy: trusts X-Forwarded-Proto for Secure cookies
+  allowed_origins: []        # extra browser origins allowed to make changes (for example a dev server)
+
+privacy:
+  save_recordings: false        # keep what the microphone heard as WAV files in data/recordings
+  recordings_keep_days: 7
+  save_transcripts: true        # keep recent transcripts for the admin UI

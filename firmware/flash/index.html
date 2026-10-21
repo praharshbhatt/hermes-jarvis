@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flash Hermes JARVIS</title>
+<script type="module" src="https://unpkg.com/esp-web-tools@10.4.0/dist/web/install-button.js?module"></script>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --text:#1b1f24; --muted:#5d6670; --line:#dfe3e8; --accent:#1769e0; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#101317; --card:#181c22; --text:#e6e9ed; --muted:#9aa3ad; --line:#2a3038; --accent:#5b9dff; } }
+  body { margin:0; background:var(--bg); color:var(--text); font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+  main { max-width:680px; margin:0 auto; padding:24px 16px; }
+  h1 { font-size:24px; margin:0 0 4px; }
+  .sub { color:var(--muted); margin:0 0 20px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin:0 0 16px; }
+  ol { padding-left:20px; margin:8px 0 0; } li { margin:6px 0; }
+  code { background:var(--bg); border:1px solid var(--line); border-radius:4px; padding:1px 5px; font-size:14px; }
+  a { color:var(--accent); }
+  .note { color:var(--muted); font-size:14px; }
+  esp-web-install-button button { background:var(--accent); color:#fff; border:0; border-radius:8px; padding:10px 18px; font:inherit; cursor:pointer; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Flash Hermes JARVIS</h1>
+  <p class="sub">Firmware for the Home Assistant Voice Preview Edition. Version __VERSION__.</p>
+
+  <div class="card">
+    <strong>1. Connect the device</strong>
+    <p>Plug the Voice PE into this computer with a USB cable (the USB-C port on the side), then:</p>
+    <esp-web-install-button manifest="manifest.json">
+      <span slot="unsupported">This browser cannot flash devices. Use Chrome or Edge on a desktop computer.</span>
+      <span slot="not-allowed">Flashing needs a secure (https) page.</span>
+    </esp-web-install-button>
+    <p class="note">Pick the device's serial port in the browser prompt. Flashing takes about a minute. When it finishes you will be asked for your Wi-Fi name and password.</p>
+  </div>
+
+  <div class="card">
+    <strong>2. Adopt it on the machine that runs hermes-jarvis</strong>
+    <ol>
+      <li>Wait until the device's ring is idle after it joins Wi-Fi.</li>
+      <li>Run <code>hermes-jarvis adopt</code>. It finds the device and gives it a private encryption key.</li>
+      <li>Run <code>hermes-jarvis doctor</code>, then <code>hermes-jarvis run</code>.</li>
+    </ol>
+  </div>
+
+  <p class="note">Flashing replaces the current firmware. To go back to the stock Home Assistant firmware, use
+    <a href="https://esphome.github.io/home-assistant-voice-pe/">the official installer</a>. Based on the
+    <a href="https://github.com/esphome/home-assistant-voice-pe">Home Assistant Voice PE</a> firmware (ESPHome). Not affiliated with Nabu Casa or Home Assistant.</p>
+</main>
+</body>
+</html>

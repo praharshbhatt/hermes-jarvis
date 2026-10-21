@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Troubleshooting guide
+    url: https://github.com/praharshbhatt/hermes-jarvis/blob/main/docs/troubleshooting.md
+    about: Most problems are covered here, and `hermes-jarvis doctor` finds the common ones.
+  - name: Report a security problem
+    url: https://github.com/praharshbhatt/hermes-jarvis/security/advisories/new
+    about: Please report vulnerabilities privately, not in a public issue.

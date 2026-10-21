@@ -1,0 +1,51 @@
+# hermes-jarvis configuration: fully local. Ollama as the brain, Whisper on this machine for speech to text.
+# No account and no cloud. Needs: pip install 'hermes-jarvis[local-stt]' and Ollama running (https://ollama.com).
+# Secrets (if any) go in .env next to this file.
+# Any setting can also be set from the environment as HJ_<SECTION>_<KEY>, for example HJ_ADMIN_HOST=0.0.0.0.
+
+data_dir: ./data
+
+persona: jarvis
+
+user:
+  name: ""
+  address_as: sir
+
+device:
+  host: ""                # empty = find the device automatically
+  port: 6053
+
+audio:
+  public_host: ""
+  port: 8651
+
+brain:
+  type: openai
+  base_url: http://localhost:11434/v1
+  model: llama3.1          # any model you have pulled with `ollama pull`
+  api_key_env: ""          # Ollama needs no key
+
+stt:
+  provider: local
+  language: en
+  local_model: small.en    # base.en or tiny.en on small boards
+
+tts:
+  voice: en_GB-alan-medium
+
+router:
+  enabled: false           # the router is for the Hermes brain
+
+admin:                    # the web UI: sign-in page, live view, settings, setup guide
+  host: 127.0.0.1         # use 0.0.0.0 only on a trusted network or behind TLS. Needs ADMIN_PASSWORD (or ADMIN_PASSWORD_HASH).
+  port: 8650
+  user: admin
+  session_idle_minutes: 30   # a sign-in ends after this long without activity
+  session_max_hours: 12      # ... and never lasts longer than this
+  trust_proxy: false         # true only behind your own TLS reverse proxy: trusts X-Forwarded-Proto for Secure cookies
+  allowed_origins: []        # extra browser origins allowed to make changes (for example a dev server)
+
+privacy:
+  save_recordings: false
+  recordings_keep_days: 7
+  save_transcripts: true

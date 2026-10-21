@@ -1,0 +1,26 @@
+# secrets and local state: never commit
+.env
+*.env
+!.env.example
+!examples/**/*.env
+config.yaml
+data/
+secrets.yaml
+firmware/secrets.yaml
+firmware/_build/
+firmware/.esphome/
+firmware/backups/
+*.bin
+# python
+.venv/
+__pycache__/
+*.egg-info/
+dist/
+.pytest_cache/
+.ruff_cache/
+.venv-fw/
+site/
+# editors and local assistant settings
+.idea/
+.vscode/
+.claude/
