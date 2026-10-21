@@ -45,7 +45,7 @@ jobs:
         with:
           path: site
       - name: Attach firmware to the release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: |
             site/hermes-jarvis.factory.bin
