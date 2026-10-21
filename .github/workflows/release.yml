@@ -41,7 +41,7 @@ jobs:
           B=firmware/.esphome/build/hermes-jarvis/.pioenvs/hermes-jarvis
           python scripts/make_flash_site.py --version "$VERSION" --factory "$B/firmware.factory.bin" --out site
           cp "$B/firmware.ota.bin" site/hermes-jarvis.ota.bin
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site
       - name: Attach firmware to the release
