@@ -15,7 +15,7 @@ jobs:
       matrix:
         python: ["3.11", "3.12"]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
@@ -30,7 +30,7 @@ jobs:
       run:
         working-directory: webui
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -52,14 +52,14 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: python3 scripts/check_links.py
 
   firmware-config:
     # Fast check that the firmware YAML still validates (a full compile runs on release).
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -70,7 +70,7 @@ jobs:
     # The device adoption flow end to end, against a small ESPHome "host" device built from the same API settings as the firmware.
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -80,7 +80,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: docker build -t hermes-jarvis:ci .
       - run: docker run --rm hermes-jarvis:ci hermes-jarvis --version
       - run: docker run --rm hermes-jarvis:ci hermes-jarvis init /tmp/x
