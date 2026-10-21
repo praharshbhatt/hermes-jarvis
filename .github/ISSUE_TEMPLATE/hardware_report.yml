@@ -1,0 +1,30 @@
+name: Hardware or provider report
+description: It works (or does not) with a device, brain or speech-to-text provider not listed as tested
+labels: [compatibility]
+body:
+  - type: input
+    id: what
+    attributes:
+      label: What did you try?
+      placeholder: "ESP32-S3-BOX-3 with the ESPHome voice assistant config"
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: Result
+      options: [Works fully, Works with problems, Does not work]
+    validations:
+      required: true
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Output of `hermes-jarvis doctor`
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: What was missing or needed changing, config snippets, anything that would help the next person.

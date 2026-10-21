@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 532" width="1100" height="532" role="img" aria-label="Timeline of one spoken turn">
+<title>One spoken turn (illustrative timings)</title>
+<rect width="1100" height="532" rx="18" fill="#0b1220"/>
+<g font-family="system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">
+<text x="34" y="46" font-size="20" font-weight="700" fill="#f1f5f9">One spoken turn</text>
+<text x="1066" y="46" font-size="13" fill="#64748b" text-anchor="end">illustrative timings</text>
+<line x1="150" y1="92" x2="150" y2="402" stroke="#334155" stroke-width="3"/>
+<text x="116" y="97" font-size="15" fill="#94a3b8" text-anchor="end">0.0 s</text>
+<circle cx="150" cy="92" r="9" fill="#a78bfa"/>
+<text x="182" y="90" font-size="13.5" font-weight="700" fill="#a78bfa">You</text>
+<text x="182" y="110" font-size="17" fill="#e2e8f0">“Hey Jarvis, what’s on my calendar today?”</text>
+<text x="116" y="159" font-size="15" fill="#94a3b8" text-anchor="end">2.2 s</text>
+<circle cx="150" cy="154" r="9" fill="#38bdf8"/>
+<text x="182" y="152" font-size="13.5" font-weight="700" fill="#38bdf8">Bridge</text>
+<text x="182" y="172" font-size="17" fill="#e2e8f0">Hears you finish (0.8 s of quiet), sends the audio to speech to text</text>
+<text x="116" y="221" font-size="15" fill="#94a3b8" text-anchor="end">2.7 s</text>
+<circle cx="150" cy="216" r="9" fill="#34d399"/>
+<text x="182" y="214" font-size="13.5" font-weight="700" fill="#34d399">Agent</text>
+<text x="182" y="234" font-size="17" fill="#e2e8f0">Gets the words and starts working: reads your calendar with its tools</text>
+<text x="116" y="283" font-size="15" fill="#94a3b8" text-anchor="end">5.2 s</text>
+<circle cx="150" cy="278" r="9" fill="#fbbf24"/>
+<text x="182" y="276" font-size="13.5" font-weight="700" fill="#fbbf24">You hear</text>
+<text x="182" y="296" font-size="17" fill="#e2e8f0">“One moment, sir.”</text>
+<text x="1066" y="296" font-size="13.5" fill="#7c8da6" text-anchor="end">nothing spoken yet, so a quick acknowledgement plays</text>
+<text x="116" y="345" font-size="15" fill="#94a3b8" text-anchor="end">6.0 s</text>
+<circle cx="150" cy="340" r="9" fill="#fbbf24"/>
+<text x="182" y="338" font-size="13.5" font-weight="700" fill="#fbbf24">You hear</text>
+<text x="182" y="358" font-size="17" fill="#e2e8f0">“Checking your calendar.”</text>
+<text x="1066" y="358" font-size="13.5" fill="#7c8da6" text-anchor="end">the agent’s own line, before its tool call</text>
+<text x="116" y="407" font-size="15" fill="#94a3b8" text-anchor="end">9.5 s</text>
+<circle cx="150" cy="402" r="9" fill="#fbbf24"/>
+<text x="182" y="400" font-size="13.5" font-weight="700" fill="#fbbf24">You hear</text>
+<text x="182" y="420" font-size="17" fill="#e2e8f0">“You have three meetings today. The first is at nine…”</text>
+<text x="1066" y="420" font-size="13.5" fill="#7c8da6" text-anchor="end">spoken sentence by sentence, as it is written</text>
+<rect x="34" y="444" width="1032" height="46" rx="10" fill="#111a2e" stroke="#334155"/>
+<text x="56" y="473" font-size="15.5" fill="#cbd5e1">Say <tspan font-weight="700" fill="#f1f5f9">“stop”</tspan> at any time to cut it off. If the agent asks you a question, the device listens for your answer by itself.</text>
+</g></svg>

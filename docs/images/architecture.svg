@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" width="1100" height="500" role="img" aria-label="Architecture: the voice device, the hermes-jarvis bridge, and the brain and speech services">
+  <title>hermes-jarvis architecture</title>
+  <defs><marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker></defs>
+  <rect width="1100" height="500" rx="18" fill="#0b1220"/>
+  <g font-family="system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">
+    <rect x="24" y="90" width="250" height="300" rx="14" fill="#111a2e" stroke="#a78bfa" stroke-width="2"/>
+<text x="44" y="124" font-size="20" font-weight="700" fill="#f1f5f9">Voice device</text>
+<text x="44" y="147" font-size="14" fill="#7c8da6">Home Assistant Voice PE</text>
+<text x="44" y="180" font-size="16" fill="#cbd5e1">Wake word</text>
+<text x="44" y="207" font-size="16" fill="#cbd5e1">Microphone, echo</text>
+<text x="44" y="234" font-size="16" fill="#cbd5e1">  cancellation</text>
+<text x="44" y="261" font-size="16" fill="#cbd5e1">Speaker, LED ring</text>
+<text x="44" y="288" font-size="16" fill="#cbd5e1">Mute, volume</text>
+    <rect x="400" y="40" width="300" height="420" rx="14" fill="#111a2e" stroke="#38bdf8" stroke-width="2"/>
+<text x="420" y="74" font-size="20" font-weight="700" fill="#f1f5f9">hermes-jarvis</text>
+<text x="420" y="97" font-size="14" fill="#7c8da6">your machine or NAS, CPU only</text>
+<text x="420" y="130" font-size="16" fill="#cbd5e1">End-of-speech detection</text>
+<text x="420" y="157" font-size="16" fill="#cbd5e1">Speech to text</text>
+<text x="420" y="184" font-size="16" fill="#cbd5e1">Router: which chat?</text>
+<text x="420" y="211" font-size="16" fill="#cbd5e1">Brain call, streamed</text>
+<text x="420" y="238" font-size="16" fill="#cbd5e1">&lt;speak&gt; parser</text>
+<text x="420" y="265" font-size="16" fill="#cbd5e1">Text to speech (Piper)</text>
+<text x="420" y="292" font-size="16" fill="#cbd5e1">Clip queue, stop, listen</text>
+<text x="420" y="319" font-size="16" fill="#cbd5e1">Admin UI</text>
+    <rect x="826" y="40" width="250" height="200" rx="14" fill="#111a2e" stroke="#34d399" stroke-width="2"/>
+<text x="846" y="74" font-size="20" font-weight="700" fill="#f1f5f9">Brain</text>
+<text x="846" y="97" font-size="14" fill="#7c8da6">writes the answers</text>
+<text x="846" y="130" font-size="16" fill="#cbd5e1">Hermes agent, or any</text>
+<text x="846" y="157" font-size="16" fill="#cbd5e1">OpenAI-compatible model</text>
+<text x="846" y="184" font-size="16" fill="#cbd5e1">(Ollama, OpenAI, ...)</text>
+    <rect x="826" y="260" width="250" height="200" rx="14" fill="#111a2e" stroke="#fbbf24" stroke-width="2"/>
+<text x="846" y="294" font-size="20" font-weight="700" fill="#f1f5f9">Speech to text</text>
+<text x="846" y="317" font-size="14" fill="#7c8da6">turns your voice into text</text>
+<text x="846" y="350" font-size="16" fill="#cbd5e1">ElevenLabs, Deepgram,</text>
+<text x="846" y="377" font-size="16" fill="#cbd5e1">OpenAI, or local Whisper</text>
+<text x="846" y="404" font-size="16" fill="#cbd5e1">(local = stays home)</text>
+    <line x1="274" y1="190" x2="398" y2="190" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/><text x="336" y="180" font-size="13" fill="#94a3b8" text-anchor="middle">mic audio</text>
+    <line x1="398" y1="300" x2="276" y2="300" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/><text x="337" y="322" font-size="13" fill="#94a3b8" text-anchor="middle">speech clips</text>
+    <text x="336" y="360" font-size="12.5" fill="#64748b" text-anchor="middle">ESPHome API</text>
+    <line x1="700" y1="120" x2="824" y2="120" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/><text x="762" y="110" font-size="13" fill="#94a3b8" text-anchor="middle">your words</text>
+    <line x1="824" y1="168" x2="702" y2="168" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/><text x="763" y="190" font-size="13" fill="#94a3b8" text-anchor="middle">streamed reply</text>
+    <line x1="700" y1="340" x2="824" y2="340" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/><text x="762" y="330" font-size="13" fill="#94a3b8" text-anchor="middle">audio</text>
+    <line x1="824" y1="388" x2="702" y2="388" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/><text x="763" y="410" font-size="13" fill="#94a3b8" text-anchor="middle">text</text>
+  </g>
+</svg>

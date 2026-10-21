@@ -1,0 +1,27 @@
+# Run hermes-jarvis in a container.
+#
+#   1. mkdir -p data && sudo chown 1000 data          (the container runs as user 1000)
+#   2. docker compose run --rm hermes-jarvis hermes-jarvis init /data
+#      -> writes data/config.yaml and data/.env. Edit both: keys go in data/.env.
+#   3. docker compose run --rm hermes-jarvis hermes-jarvis adopt        (once, after flashing the device)
+#   4. docker compose up -d
+#
+# Host networking is the simple way: the bridge finds the device by mDNS, and the device downloads speech clips
+# straight from the host. If you cannot use it, see "Without host networking" in docs/installation.md.
+services:
+  hermes-jarvis:
+    image: ghcr.io/praharshbhatt/hermes-jarvis:latest   # or: build: .
+    # build:
+    #   context: .
+    #   args:
+    #     EXTRAS: local-stt        # add faster-whisper for fully local speech to text
+    container_name: hermes-jarvis
+    restart: unless-stopped
+    init: true                 # reaps child processes and forwards stop signals
+    stop_grace_period: 15s
+    network_mode: host
+    environment:
+      # With host networking this port is on the host: keep the admin UI local unless you put TLS in front of it.
+      HJ_ADMIN_HOST: 127.0.0.1
+    volumes:
+      - ./data:/data

@@ -1,0 +1,32 @@
+hermes-jarvis is licensed under the GNU General Public License, version 3 or later (see LICENSE).
+
+It uses or includes the following. Licenses are those of the upstream projects; check them for your use.
+
+Included in this repository
+  firmware/upstream/home-assistant-voice.yaml
+      Home Assistant Voice Preview Edition configuration, vendored unchanged except two pinned references, from
+      https://github.com/esphome/home-assistant-voice-pe at commit dc2b9b72657bd5b44812ab184c958a29cda5a7ac.
+      License: the ESPHome License (MIT and GPL), see firmware/upstream/LICENSE.
+  The firmware fetches the Voice PE sound files at build time from the same commit. They are
+      "Home Assistant Voice Preview Edition Sounds" (c) 2024 Clayton Charles Tapp,
+      licensed under Creative Commons Attribution 4.0 International, see firmware/upstream/SOUNDS-LICENSE.md.
+
+Used as dependencies (not included)
+  Piper text to speech (piper-tts, https://github.com/OHF-Voice/piper1-gpl)   GPL-3.0-or-later
+  aioesphomeapi                                                              MIT
+  ESPHome (to build the firmware)                                            MIT and GPL, see above
+  microWakeWord models and tooling (wake words run on the device)           Apache-2.0
+  pysilero-vad (Silero voice activity detection)                            MIT
+  faster-whisper (optional, fully local speech to text)                      MIT
+  aiohttp, numpy, PyYAML                                                     Apache-2.0, BSD, MIT
+  ESP Web Tools (the web flasher loads it from a CDN)                        Apache-2.0
+
+Services you may connect (not included): the Hermes agent (Nous Research), OpenRouter, TypeSafe's Jev model,
+ElevenLabs, Deepgram, OpenAI. Their terms apply.
+
+Voices are not included. Piper voices are downloaded from https://huggingface.co/rhasspy/piper-voices on first use; each has
+its own license in its MODEL_CARD.
+
+Trademarks. JARVIS is a fictional character owned by Marvel/Disney. Home Assistant is a trademark of Nabu Casa, ESPHome of
+the Open Home Foundation. This project is not affiliated with or endorsed by any of them and ships no actor's voice,
+likeness or studio assets.

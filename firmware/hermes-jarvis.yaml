@@ -1,0 +1,106 @@
+# hermes-jarvis firmware for the Home Assistant Voice Preview Edition (ESP32-S3).
+#
+# This is upstream's stock Voice PE config (vendored in upstream/, pinned) plus a few changes:
+#   - API encryption without a baked-in key: `hermes-jarvis adopt` gives each device its own key. No secrets in the image.
+#   - Wi-Fi is provisioned after flashing, from the browser (Improv over USB) or a phone (Improv over Bluetooth).
+#   - The stop word works while the bridge is speaking, and tells the bridge so it can drop the rest of the reply.
+#
+# Build: see firmware/README.md. Flash without building: use the web flasher (docs/flashing.md).
+
+packages:
+  # Same arrangement as upstream's factory image: the voice assistant waits for Bluetooth provisioning to finish
+  # before it connects. It must come before the real package so its lists are the base the package appends to.
+  improv_wait_for_ble:
+    voice_assistant:
+      on_client_connected:
+        - wait_until:
+            not: ble.enabled
+        - delay: 2s
+    wifi:
+      on_disconnect:
+        - ble.enable:
+  voice-pe: !include upstream/home-assistant-voice.yaml
+
+esphome:
+  name: hermes-jarvis
+  friendly_name: Hermes JARVIS
+  project:
+    name: hermes-jarvis.voice-pe
+    version: "0.1.0"
+
+api:
+  # Key-less encryption: until a client sets a key, the device accepts a plaintext connection; after that it only
+  # accepts that key. Only a factory reset removes it. This is the same flow Home Assistant uses to adopt a device.
+  encryption:
+
+# ----- Wi-Fi provisioning (from upstream's factory config) -----
+wifi:
+  on_connect:
+    - delay: 5s  # gives time for the provisioning result to be transmitted
+    - ble.disable:
+    - script.execute: control_leds
+
+improv_serial:
+
+esp32_ble:
+  name: hermes-jarvis
+
+esp32_improv:
+  authorizer: center_button
+  on_start:
+    - lambda: id(improv_ble_in_progress) = true;
+    - script.execute: control_leds
+  on_provisioned:
+    - lambda: id(improv_ble_in_progress) = false;
+    - script.execute: control_leds
+  on_stop:
+    - lambda: id(improv_ble_in_progress) = false;
+    - script.execute: control_leds
+
+# ----- stop word while the bridge is speaking -----
+# The bridge plays replies as media player announcements after the voice pipeline run has ended, so the stock
+# stop-word handling (driven by pipeline events) never runs. Enable the stop model for as long as anything is
+# announcing. It stays on across the short gaps between sentence clips and goes off 2 s after the last clip ends.
+micro_wake_word:
+  # Tell the bridge when the stop word fires (the stock config already stops the playing announcement itself).
+  on_wake_word_detected:
+    - if:
+        condition:
+          lambda: return wake_word == "stop" || wake_word == "Stop";
+        then:
+          - event.trigger:
+              id: stop_word_event
+              event_type: stop
+
+event:
+  - platform: template
+    id: stop_word_event
+    name: "Stop word"
+    event_types:
+      - stop
+
+media_player:
+  - id: !extend external_media_player
+    on_announcement:
+      - script.stop: stop_word_off_later
+      - if:
+          condition:
+            switch.is_off: timer_ringing
+          then:
+            - micro_wake_word.enable_model: stop
+    on_idle:
+      - script.execute: stop_word_off_later
+
+script:
+  - id: stop_word_off_later
+    mode: restart
+    then:
+      - delay: 2s
+      - if:
+          condition:
+            and:
+              - switch.is_off: timer_ringing
+              - not:
+                  media_player.is_announcing:
+          then:
+            - micro_wake_word.disable_model: stop
