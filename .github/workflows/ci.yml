@@ -15,8 +15,8 @@ jobs:
       matrix:
         python: ["3.11", "3.12"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python }}
           cache: pip
@@ -30,8 +30,8 @@ jobs:
       run:
         working-directory: webui
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 20
           cache: npm
@@ -52,15 +52,15 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: python3 scripts/check_links.py
 
   firmware-config:
     # Fast check that the firmware YAML still validates (a full compile runs on release).
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - run: pip install "esphome==2025.7.2"
@@ -70,8 +70,8 @@ jobs:
     # The device adoption flow end to end, against a small ESPHome "host" device built from the same API settings as the firmware.
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       # esphome pins an older aioesphomeapi than hermes-jarvis needs, so it gets its own environment
@@ -82,7 +82,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: docker build -t hermes-jarvis:ci .
       - run: docker run --rm hermes-jarvis:ci hermes-jarvis --version
       - run: docker run --rm hermes-jarvis:ci hermes-jarvis init /tmp/x
