@@ -1,5 +1,5 @@
 # hermes-jarvis: CPU only. The image holds no secrets and no voices; both live in the /data volume.
-FROM python:3.12-slim
+FROM python:3.15-slim
 
 ARG EXTRAS=""
 ENV PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1 PIP_DISABLE_PIP_VERSION_CHECK=1
